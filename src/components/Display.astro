@@ -1,0 +1,41 @@
+---
+
+---
+
+<div class='tracking-[-0.1rem] relative'>
+  <div class='content'></div>
+</div>
+
+<script>
+  const canvas = document.querySelector('.content');
+  const spotlight = document.createElement('div');
+
+  spotlight.classList.add('absolute', 'top-0', 'left-0', 'w-full', 'h-full');
+  spotlight.style.background =
+    'radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,1) 100%)';
+
+  function generateRandomString(length: number) {
+    var text = '';
+    var possible =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (var i = 0; i < length; i++)
+      text +=
+        possible.charAt(Math.floor(Math.random() * possible.length)) + ' ';
+
+    return text;
+  }
+  canvas!.innerHTML = generateRandomString(10000);
+  canvas!.appendChild(spotlight);
+
+  const body = document.querySelector('body');
+
+  body?.addEventListener('mousemove', (event) => {
+    const x = event.clientX;
+    const y = event.clientY;
+
+    spotlight.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,1) 100%)`;
+    canvas!.innerHTML = generateRandomString(10000);
+    canvas!.appendChild(spotlight);
+  });
+</script>
